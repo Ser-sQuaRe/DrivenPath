@@ -1,6 +1,6 @@
 import csv
+import os
 import random
-import csv
 import logging
 import uuid
 import polars as pl
@@ -87,11 +87,16 @@ def _write_to_csv() -> None:
         rows = random.randint(100_372, 100_372)
     else:
         rows = random.randint(0, 1_101)
+
+    # Check if the file already exists. If it does, skip writing the header.
+    file_exists =  os.path.isfile("/opt/airflow/data/raw_data.csv")
     
     # Open the CSV file for writing.
     with open("/opt/airflow/data/raw_data.csv", mode="a", encoding="utf-8", newline="") as file:
         writer = csv.writer(file)
-        writer.writerow(headers)
+        # Check if the file already exists. If it does, skip writing the header.
+        if not file_exists:
+            writer.writerow(headers)
         
         # Generate and write each record to the CSV.
         for _ in range(rows):
