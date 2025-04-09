@@ -8,8 +8,12 @@ __pycache__/
 consumer_package/
 producer_package/
 *.xml
+*.log
+*.csv
 *.iml
 .idea
 dbt/logs/
 dbt/.user.yml
 dbt/target/
+chapter_3/src_3/dbt/target/
+chapter_3/src_3/dbt/logs/
